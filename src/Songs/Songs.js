@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import classes from './Songs.module.css';
+import SongsList from './SongsList/SongsList';
 
 const Songs = () => {
   const [songs, setSongs] = useState([]);
@@ -28,7 +29,7 @@ const Songs = () => {
     } else if (loading) {
       return <div>Loading...</div>;
     } else {
-      return songs.map(song => <div>{song.title}</div>);
+      return <SongsList songs={songs} />;
     }
   }
 
