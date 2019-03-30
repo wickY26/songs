@@ -1,11 +1,41 @@
 import React from 'react';
+import InfiniteLoader from 'react-window-infinite-loader';
+import { FixedSizeList as List } from "react-window";
 import classes from './SongsList.module.css';
 
-const SongsList = (props) => {
+const SongsList = ({ songs, hasMoreSongs = false, loading = false, loadNextSongs, height = 600 }) => {
+  // if there are more songs to be loaded then add an extra row for loading indicator.
+  const itemCount = hasMoreSongs ? songs.length + 1 : songs.length;
+  // load more songs if it is already loading
+  const loadMoreItems = loading ? () => { } : loadNextSongs;
+  // check if song with given index is loaded by checking length of current data
+  const isItemLoaded = index => !hasMoreSongs || index < songs.length;
+  // render a song item or loading indicator.
+  const Item = ({ index, style }) => {
+    const content = isItemLoaded(index) ? songs[index].title : 'Loading...';
+    return <div style={style}>{content}</div>;
+  };
+
   return (
-    <div className={classes.wrapper}>
-      {props.songs.map(song => <div>{song.title}</div>)}
-    </div>
+    <InfiniteLoader
+      isItemLoaded={isItemLoaded}
+      itemCount={itemCount}
+      loadMoreItems={loadMoreItems}
+    >
+      {({ onItemsRendered, ref }) => (
+        <List
+          className={classes.list}
+          itemCount={itemCount}
+          itemSize={120}
+          onItemsRendered={onItemsRendered}
+          ref={ref}
+          width={'%100'}
+          height={height}
+        >
+          {Item}
+        </List>
+      )}
+    </InfiniteLoader>
   )
 }
 
