@@ -1,5 +1,10 @@
 .wrapper {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  max-height: 100%;
   max-width: 960px;
-  margin: 20px auto;
+  text-align: center;
+  margin: auto;
+  padding: 20px;
+  box-sizing: border-box;
 }
