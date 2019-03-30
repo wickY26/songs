@@ -30,7 +30,7 @@ const SongsList = ({ songs, hasMoreSongs = false, loading = false, loadNextSongs
         <List
           className={classes.list}
           itemCount={itemCount}
-          itemSize={120}
+          itemSize={146}
           onItemsRendered={onItemsRendered}
           ref={ref}
           width={'%100'}
