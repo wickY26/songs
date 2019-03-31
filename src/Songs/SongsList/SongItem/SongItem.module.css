@@ -39,7 +39,6 @@
 }
 
 .info {
-  line-height: 40px;
   text-align: start;
   display: flex;
   flex-direction: row;
@@ -47,9 +46,15 @@
 
 .rating {
   margin-right: 16px;
+  align-items: center;
+  display: flex;
+  padding-top: 4px;
 }
 
 .artist {
   flex: 1 1 auto;
-  font-size: 16px;
+  color: #878789;
+  font-size: 24px;
+  font-weight: 100;
+  line-height: 40px;
 }

@@ -1,8 +1,9 @@
 import React from 'react';
+import Ratings from 'react-ratings-declarative';
 import classes from './SongItem.module.css';
 
-const SongItem = ({ song, style }) => {
-  const {artist, level, rating, title} = song;
+const SongItem = ({ song, style, onRatingChange }) => {
+  const { artist, level, rating, title } = song;
   const radius = 175;
   const diameter = Math.round(Math.PI * radius * 2);
   const getOffset = (val = 0) => Math.round((15 - Math.min(val, 15)) / 15 * diameter);
@@ -23,7 +24,23 @@ const SongItem = ({ song, style }) => {
       <div className={classes.content}>
         <div className={classes.title}>{title}</div>
         <div className={classes.info}>
-          <div className={classes.rating}>{rating}</div>
+          <div className={classes.rating}>
+            <Ratings
+              rating={rating}
+              changeRating={(newRating) => onRatingChange(newRating, song.id)}
+              widgetDimensions={'24px'}
+              widgetRatedColors={'#dbeaff'}
+              widgetHoverColors={'#dbeaff'}
+              widgetEmptyColors={'#565c67'}
+              widgetSpacings={'4'}
+            >
+              <Ratings.Widget />
+              <Ratings.Widget />
+              <Ratings.Widget />
+              <Ratings.Widget />
+              <Ratings.Widget />
+            </Ratings>
+          </div>
           <div className={classes.artist}>{artist}</div>
         </div>
       </div>

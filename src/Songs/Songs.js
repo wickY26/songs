@@ -21,7 +21,8 @@ const Songs = () => {
       try {
         setError(false);
         const result = await axios('/songs.json');
-        setData([...result.data]);
+        const songsData = result.data.map((song, index) => { return { ...song, id: index } });
+        setData(songsData);
       } catch (err) {
         setError(true);
       }
@@ -32,7 +33,7 @@ const Songs = () => {
     if (error) {
       return <div>An error is occured</div>;
     } else if (data.length) {
-      return <SongsList songs={songs} loading={loading} hasMoreSongs={hasMoreSongs} loadNextSongs={loadNextSongs} height={height} />;
+      return <SongsList songs={songs} loading={loading} hasMoreSongs={hasMoreSongs} loadNextSongs={loadNextSongs} height={height} onRatingChange={onRatingChange} />;
     }
   }
 
@@ -45,6 +46,24 @@ const Songs = () => {
       setHasMoreSongs(songs.length + 5 < data.length);
     }, 1000);
   };
+
+  const onRatingChange = (newRating, id) => {
+    setSongs(songs.map(song => {
+      if (song.id !== id) {
+        return song;
+      } else {
+        return { ...song, rating: newRating };
+      }
+    }));
+    // this is just update for original source for using updated data with filtering
+    setData(data.map(song => {
+      if (song.id !== id) {
+        return song;
+      } else {
+        return { ...song, rating: newRating };
+      }
+    }));
+  }
 
   return (
     <div className={classes.wrapper} ref={ref}>

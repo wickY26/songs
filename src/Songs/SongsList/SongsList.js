@@ -4,7 +4,7 @@ import { FixedSizeList as List } from "react-window";
 import classes from './SongsList.module.css';
 import SongItem from './SongItem/SongItem';
 
-const SongsList = ({ songs, hasMoreSongs = false, loading = false, loadNextSongs, height = 600 }) => {
+const SongsList = ({ songs, hasMoreSongs = false, loading = false, loadNextSongs, height = 600, onRatingChange }) => {
   // if there are more songs to be loaded then add an extra row for loading indicator.
   const itemCount = hasMoreSongs ? songs.length + 1 : songs.length;
   // load more songs if it is already loading
@@ -14,7 +14,7 @@ const SongsList = ({ songs, hasMoreSongs = false, loading = false, loadNextSongs
   // render a song item or loading indicator.
   const Item = ({ index, style }) => {
     if (isItemLoaded(index)) {
-      return <SongItem song={{...songs[index]}} style={style} />;
+      return <SongItem song={{...songs[index]}} onRatingChange={onRatingChange} style={style} />;
     } else {
       return <div style={style}>Loading...</div>;
     }
