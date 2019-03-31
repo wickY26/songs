@@ -19,12 +19,6 @@
   border-radius: 16px;
 }
 
-.level {
-  width: 64px;
-  height: 64px;
-  margin: 24px;
-}
-
 .content {
   flex: 1 1 auto;
   display: flex;
