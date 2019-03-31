@@ -2,21 +2,26 @@
   flex: 1 1 auto;
 }
 
+.list {
+  background-color: #0e0f12;
+  color: #babac0;
+}
+
 .list::-webkit-scrollbar {
-  background-color:#fff;
+  background-color:#0e0f12;
   width:8px
 }
 
 /* background of the scrollbar except button or resizer */
 .list::-webkit-scrollbar-track {
-  background-color:#fff
+  background-color:#0e0f12
 }
 
 /* scrollbar itself */
 .list::-webkit-scrollbar-thumb {
-  background-color:#babac0;
+  background-color:#212326;
   border-radius:8px;
-  border:2px solid #fff
+  border:2px solid #0e0f12
 }
 
 /* set button(top and bottom of the scrollbar) */

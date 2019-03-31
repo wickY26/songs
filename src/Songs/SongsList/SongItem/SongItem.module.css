@@ -1,0 +1,55 @@
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  flex: 1 1 auto;
+  border-bottom: 2px solid #212326;
+  padding: 16px;
+  height: 146px;
+  box-sizing: border-box;
+}
+
+.logo {
+  background-image: url('./logo.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 80px;
+  background-color: #4fc514;
+  width: 128px;
+  height: 112px;
+  border-radius: 16px;
+}
+
+.level {
+  width: 64px;
+  height: 64px;
+  margin: 24px;
+}
+
+.content {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  margin: 16px 0;
+}
+
+.title {
+  line-height: 40px;
+  text-align: start;
+  font-size: 24px;
+}
+
+.info {
+  line-height: 40px;
+  text-align: start;
+  display: flex;
+  flex-direction: row;
+}
+
+.rating {
+  margin-right: 16px;
+}
+
+.artist {
+  flex: 1 1 auto;
+  font-size: 16px;
+}
