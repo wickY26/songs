@@ -1,0 +1,31 @@
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  flex: 1 1 auto;
+  border-bottom: 2px solid #212326;
+  padding: 16px;
+  box-sizing: border-box;
+  background-color: #0e0f12;
+}
+
+.search {
+  flex: 1 1 auto;
+  padding: 8px;
+  margin-right: 16px;
+  font-size: 24px;
+  background-color: inherit;
+  color: white;
+  outline: none;
+  border: none;
+  border-bottom: solid 2px #4fc514;
+}
+
+.level {
+  padding: 8px;
+  font-size: 16px;
+  background-color: inherit;
+  color: white;
+  outline: none;
+  border: none;
+  border-bottom: solid 2px #4fc514;
+}
