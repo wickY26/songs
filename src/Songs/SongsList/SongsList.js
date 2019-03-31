@@ -14,7 +14,7 @@ const SongsList = ({ songs, hasMoreSongs = false, loading = false, loadNextSongs
   // render a song item or loading indicator.
   const Item = ({ index, style }) => {
     if (isItemLoaded(index)) {
-      return <SongItem song={{...songs[index]}} onRatingChange={onRatingChange} style={style} />;
+      return <SongItem song={{ ...songs[index] }} onRatingChange={onRatingChange} style={style} />;
     } else {
       return <div style={style}>Loading...</div>;
     }

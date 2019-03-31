@@ -2,10 +2,12 @@ import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import classes from './Songs.module.css';
 import SongsList from './SongsList/SongsList';
+import SongsFilter from './SongsFilter/SongsFilter';
 
 const Songs = () => {
   const [data, setData] = useState([]);
   const [songs, setSongs] = useState([]);
+  const [filter, setFilter] = useState({ searchKey: '', level: 0 });
   const [hasMoreSongs, setHasMoreSongs] = useState(true);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -14,7 +16,13 @@ const Songs = () => {
 
   useEffect(() => {
     setHeight(ref.current.clientHeight)
-  })
+  });
+
+  useEffect(() => {
+    if (data.length) {
+      filterSongs(5, filter.searchKey, filter.level);
+    }
+  }, [filter]);
 
   useEffect(() => {
     (async () => {
@@ -38,13 +46,7 @@ const Songs = () => {
   }
 
   const loadNextSongs = (startIndex) => {
-    setLoading(true);
-    // use timeout to simulate rest api call
-    setTimeout(() => {
-      setLoading(false);
-      setSongs([...songs].concat(data.slice(startIndex, songs.length + 5)));
-      setHasMoreSongs(songs.length + 5 < data.length);
-    }, 1000);
+    filterSongs(startIndex + 5, filter.searchKey, filter.level);
   };
 
   const onRatingChange = (newRating, id) => {
@@ -65,8 +67,26 @@ const Songs = () => {
     }));
   }
 
+  const filterSongs = (endIndex, searchKey = '', level = 0) => {
+    setLoading(true);
+    // use timeout to simulate rest api call
+    setTimeout(() => {
+      const filteredSongs = data.filter(song => {
+        if (song.title.toUpperCase().includes(searchKey.toUpperCase()) || song.artist.toUpperCase().includes(searchKey.toUpperCase())) {
+          return !level || song.level === level;
+        } else {
+          return false;
+        }
+      });
+      setLoading(false);
+      setSongs(filteredSongs.slice(0, endIndex));
+      setHasMoreSongs(endIndex < filteredSongs.length);
+    }, 1000);
+  }
+
   return (
     <div className={classes.wrapper} ref={ref}>
+      <SongsFilter onFilterChange={setFilter} />
       {content()}
     </div>
   )
