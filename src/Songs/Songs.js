@@ -21,7 +21,8 @@ const Songs = () => {
       try {
         setError(false);
         const result = await axios('/songs.json');
-        setData([...result.data]);
+        const songsData = result.data.map((song, index) => { return { ...song, id: index } });
+        setData(songsData);
       } catch (err) {
         setError(true);
       }
