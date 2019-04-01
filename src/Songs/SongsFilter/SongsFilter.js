@@ -32,7 +32,7 @@ const SongsFilter = ({ onFilterChange }) => {
         onChange={handleSelectChange}
       >
         <option>Select Level</option>
-        {levels.map((level) => <option value={level}>{level}</option>)}
+        {levels.map((level) => <option value={level} key={level}>{level}</option>)}
       </select>
     </div>
   )

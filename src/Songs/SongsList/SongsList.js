@@ -5,30 +5,33 @@ import classes from './SongsList.module.css';
 import SongItem from './SongItem/SongItem';
 import Message from '../../Message/Message';
 
-const SongsList = ({ songs, hasMoreSongs = false, loading = false, loadNextSongs, height = 600, onRatingChange }) => {
+// check if song with given index is loaded by checking length of current data
+export const isItemLoaded = (index, hasMoreSongs, songsCount) => !hasMoreSongs || index < songsCount;
+
+// load more songs if it is not loading
+export const loadMoreItems = (loading, loadNextSongs) => loading ? () => { } : loadNextSongs;
+
+// render a song item or loading indicator.
+export const content = (index, style, songs, onRatingChange, isSongLoaded) => {
+  if (isSongLoaded) {
+    return <SongItem song={{ ...songs[index] }} onRatingChange={onRatingChange} style={style} />;
+  } else {
+    return <Message style={style} message={'Loading...'} />;
+  }
+};
+
+const SongsList = ({ songs, hasMoreSongs, loading, loadNextSongs, height = 600, onRatingChange }) => {
   // if there are more songs to be loaded then add an extra row for loading indicator.
   const itemCount = hasMoreSongs ? songs.length + 1 : songs.length;
-  // load more songs if it is already loading
-  const loadMoreItems = loading ? () => { } : loadNextSongs;
-  // check if song with given index is loaded by checking length of current data
-  const isItemLoaded = index => !hasMoreSongs || index < songs.length;
-  // render a song item or loading indicator.
-  const Item = ({ index, style }) => {
-    if (isItemLoaded(index)) {
-      return <SongItem song={{ ...songs[index] }} onRatingChange={onRatingChange} style={style} />;
-    } else {
-      return <Message style={style} message={'Loading...'} />;
-    }
-  };
 
   return (
     !itemCount ?
     <Message message={'No songs were found!'} />
     :
     <InfiniteLoader
-      isItemLoaded={isItemLoaded}
+      isItemLoaded={(index) => isItemLoaded(index, hasMoreSongs, songs.length)}
       itemCount={itemCount}
-      loadMoreItems={loadMoreItems}
+      loadMoreItems={loadMoreItems(loading, loadNextSongs)}
     >
       {({ onItemsRendered, ref }) => (
         <List
@@ -40,7 +43,7 @@ const SongsList = ({ songs, hasMoreSongs = false, loading = false, loadNextSongs
           width={'%100'}
           height={height}
         >
-          {Item}
+          {({ index, style }) => content(index, style, songs, onRatingChange, isItemLoaded(index, hasMoreSongs, songs.length))}
         </List>
       )}
     </InfiniteLoader>
