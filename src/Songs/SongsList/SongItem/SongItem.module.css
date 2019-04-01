@@ -1,0 +1,87 @@
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  flex: 1 1 auto;
+  border-bottom: 2px solid #212326;
+  padding: 16px;
+  height: 146px;
+  box-sizing: border-box;
+}
+
+.logo {
+  background-image: url('./logo.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 80px;
+  background-color: #4fc514;
+  min-width: 128px;
+  height: 112px;
+  border-radius: 16px;
+}
+
+.content {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  margin: 16px 0;
+  overflow: hidden;
+}
+
+.title {
+  line-height: 40px;
+  text-align: start;
+  font-size: 24px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.info {
+  text-align: start;
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+}
+
+.rating {
+  margin-right: 16px;
+  align-items: center;
+  display: flex;
+  padding-top: 4px;
+  min-width: 120px;
+}
+
+.artist {
+  flex: 1 1 auto;
+  color: #878789;
+  font-size: 24px;
+  font-weight: 100;
+  line-height: 40px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 767px) {
+  .content {
+    margin: 0;
+  }
+
+  .info {
+    flex-direction: column;
+  }
+
+  .logo {
+    min-width: 96px;
+    height: 84px;
+    margin: 14px 0;
+    background-size: 60px;
+    border-radius: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo {
+    display: none;
+  }
+}
