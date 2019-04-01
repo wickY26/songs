@@ -81,7 +81,7 @@ const Songs = () => {
       setLoading(false);
       setSongs(filteredSongs.slice(0, endIndex));
       setHasMoreSongs(endIndex < filteredSongs.length);
-    }, 1000);
+    }, 500);
   }
 
   return (
