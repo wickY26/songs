@@ -3,6 +3,7 @@ import InfiniteLoader from 'react-window-infinite-loader';
 import { FixedSizeList as List } from "react-window";
 import classes from './SongsList.module.css';
 import SongItem from './SongItem/SongItem';
+import Message from '../../Message/Message';
 
 const SongsList = ({ songs, hasMoreSongs = false, loading = false, loadNextSongs, height = 600, onRatingChange }) => {
   // if there are more songs to be loaded then add an extra row for loading indicator.
@@ -16,11 +17,14 @@ const SongsList = ({ songs, hasMoreSongs = false, loading = false, loadNextSongs
     if (isItemLoaded(index)) {
       return <SongItem song={{ ...songs[index] }} onRatingChange={onRatingChange} style={style} />;
     } else {
-      return <div style={style}>Loading...</div>;
+      return <Message style={style} message={'Loading...'} />;
     }
   };
 
   return (
+    !itemCount ?
+    <Message message={'No songs were found!'} />
+    :
     <InfiniteLoader
       isItemLoaded={isItemLoaded}
       itemCount={itemCount}
