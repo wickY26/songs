@@ -3,3 +3,15 @@
   height: 64px;
   margin: 24px;
 }
+
+@media (max-width: 767px) {
+  .wrapper {
+    margin: 24px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .wrapper {
+    margin: 24px 8px 24px 0;
+  }
+}
