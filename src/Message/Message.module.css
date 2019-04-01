@@ -1,0 +1,15 @@
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  flex: 1 1 auto;
+  background-color: #0e0f12;
+  color: #babac0;
+  border-bottom: 2px solid #212326;
+  padding: 16px;
+  height: 146px;
+  box-sizing: border-box;
+  font-size: 24px;
+  font-weight: 100;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,12 +1,12 @@
 import React from 'react';
 import classes from './Message.module.css';
 
-const Message = () => {
+const Message = ({ message, style }) => {
   return (
-    <div>
-      
+    <div style={style} className={classes.wrapper}>
+      {message}
     </div>
   )
 }
 
-export default Message
+export default Message;
