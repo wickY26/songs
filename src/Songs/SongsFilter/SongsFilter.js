@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from 'react';
+import debounce from 'lodash.debounce'
 import classes from './SongsFilter.module.css';
 
 const SongsFilter = ({ onFilterChange }) => {
   const [filter, setFilter] = useState({ searchKey: '', level: 0 });
   const levels = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+  const dOnFilterChange = debounce(onFilterChange, 500);
 
   useEffect(() => {
-    onFilterChange(filter);
+    dOnFilterChange(filter);
+    return () => {
+      dOnFilterChange.cancel();
+    }
   }, [filter]);
 
   const handleInputChange = (event) => {
